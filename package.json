@@ -10,9 +10,18 @@
   },
   "author": "",
   "license": "ISC",
+  "staticFiles": {
+    "staticPath": [
+      "static",
+      "static"
+    ],
+    "watcherGlob": "**"
+  },
   "dependencies": {
     "d3": "^6.6.2",
-    "rollup": "^2.45.1",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "flubber": "^0.4.2"
+  },
+  "devDependencies": {
+    "parcel-plugin-static-files-copy": "^2.6.0"
   }
 }

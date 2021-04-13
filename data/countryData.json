@@ -1,0 +1,983 @@
+[
+  {
+    "country": "China",
+    "countryCode": "CHN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 4,
+    "population": 1344130000
+  },
+  {
+    "country": "India",
+    "countryCode": "IND",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 1221156319
+  },
+  {
+    "country": "United States",
+    "countryCode": "USA",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 7,
+    "socialAchieved": 9,
+    "population": 311582564
+  },
+  {
+    "country": "Indonesia",
+    "countryCode": "IDN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 2,
+    "population": 243801639
+  },
+  {
+    "country": "Brazil",
+    "countryCode": "BRA",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 6,
+    "population": 196935134
+  },
+  {
+    "country": "Pakistan",
+    "countryCode": "PAK",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 2,
+    "socialAchieved": 1,
+    "population": 176166353
+  },
+  {
+    "country": "Bangladesh",
+    "countryCode": "BGD",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 1,
+    "population": 152862431
+  },
+  {
+    "country": "Russia",
+    "countryCode": "RUS",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 3,
+    "population": 142956460
+  },
+  {
+    "country": "Japan",
+    "countryCode": "JPN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 10,
+    "population": 127817277
+  },
+  {
+    "country": "Mexico",
+    "countryCode": "MEX",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 6,
+    "population": 119361233
+  },
+  {
+    "country": "Philippines",
+    "countryCode": "PHL",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 0,
+    "population": 95053437
+  },
+  {
+    "country": "Vietnam",
+    "countryCode": "VNM",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 6,
+    "population": 87840000
+  },
+  {
+    "country": "Germany",
+    "countryCode": "DEU",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 11,
+    "population": 81797673
+  },
+  {
+    "country": "Egypt",
+    "countryCode": "EGY",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 4,
+    "socialAchieved": 3,
+    "population": 79392466
+  },
+  {
+    "country": "Iran",
+    "countryCode": "IRN",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 3,
+    "population": 75424285
+  },
+  {
+    "country": "Turkey",
+    "countryCode": "TUR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 3,
+    "population": 73058638
+  },
+  {
+    "country": "Thailand",
+    "countryCode": "THA",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 6,
+    "population": 66576332
+  },
+  {
+    "country": "France",
+    "countryCode": "FRA",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 10,
+    "population": 65343588
+  },
+  {
+    "country": "United Kingdom",
+    "countryCode": "GBR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 8,
+    "population": 63258918
+  },
+  {
+    "country": "Italy",
+    "countryCode": "ITA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 6,
+    "population": 59379449
+  },
+  {
+    "country": "South Africa",
+    "countryCode": "ZAF",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 1,
+    "population": 51553479
+  },
+  {
+    "country": "South Korea",
+    "countryCode": "KOR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 8,
+    "population": 49779440
+  },
+  {
+    "country": "Colombia",
+    "countryCode": "COL",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 3,
+    "socialAchieved": 3,
+    "population": 47078792
+  },
+  {
+    "country": "Spain",
+    "countryCode": "ESP",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 7,
+    "socialAchieved": 8,
+    "population": 46742697
+  },
+  {
+    "country": "Tanzania",
+    "countryCode": "TZA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 46354607
+  },
+  {
+    "country": "Ukraine",
+    "countryCode": "UKR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 4,
+    "population": 45706100
+  },
+  {
+    "country": "Argentina",
+    "countryCode": "ARG",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 7,
+    "population": 40728738
+  },
+  {
+    "country": "Poland",
+    "countryCode": "POL",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 7,
+    "population": 38534157
+  },
+  {
+    "country": "Algeria",
+    "countryCode": "DZA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 2,
+    "socialAchieved": 4,
+    "population": 37762962
+  },
+  {
+    "country": "Uganda",
+    "countryCode": "UGA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 35148064
+  },
+  {
+    "country": "Canada",
+    "countryCode": "CAN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 9,
+    "population": 34342780
+  },
+  {
+    "country": "Morocco",
+    "countryCode": "MAR",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 2,
+    "population": 32059424
+  },
+  {
+    "country": "Peru",
+    "countryCode": "PER",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 4,
+    "socialAchieved": 3,
+    "population": 29614887
+  },
+  {
+    "country": "Venezuela",
+    "countryCode": "VEN",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 5,
+    "population": 29500625
+  },
+  {
+    "country": "Uzbekistan",
+    "countryCode": "UZB",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 4,
+    "population": 29339400
+  },
+  {
+    "country": "Malaysia",
+    "countryCode": "MYS",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 4,
+    "population": 28758968
+  },
+  {
+    "country": "Nepal",
+    "countryCode": "NPL",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 1,
+    "population": 27156367
+  },
+  {
+    "country": "Ghana",
+    "countryCode": "GHA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 2,
+    "population": 24820706
+  },
+  {
+    "country": "Mozambique",
+    "countryCode": "MOZ",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 0,
+    "population": 24581367
+  },
+  {
+    "country": "Yemen",
+    "countryCode": "YEM",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 0,
+    "population": 23304206
+  },
+  {
+    "country": "Australia",
+    "countryCode": "AUS",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 10,
+    "population": 22340000
+  },
+  {
+    "country": "Syrian Arab Republic",
+    "countryCode": "SYR",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 3,
+    "socialAchieved": 4,
+    "population": 21961676
+  },
+  {
+    "country": "Madagascar",
+    "countryCode": "MDG",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 21678934
+  },
+  {
+    "country": "Cameroon",
+    "countryCode": "CMR",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 21156272
+  },
+  {
+    "country": "Sri Lanka",
+    "countryCode": "LKA",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 3,
+    "population": 20869000
+  },
+  {
+    "country": "Angola",
+    "countryCode": "AGO",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 0,
+    "population": 20180490
+  },
+  {
+    "country": "Romania",
+    "countryCode": "ROU",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 5,
+    "population": 20147528
+  },
+  {
+    "country": "Chile",
+    "countryCode": "CHL",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 6,
+    "population": 17308449
+  },
+  {
+    "country": "Netherlands",
+    "countryCode": "NLD",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 11,
+    "population": 16693074
+  },
+  {
+    "country": "Kazakhstan",
+    "countryCode": "KAZ",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 7,
+    "socialAchieved": 7,
+    "population": 16556600
+  },
+  {
+    "country": "Niger",
+    "countryCode": "NER",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 16511462
+  },
+  {
+    "country": "Burkina Faso",
+    "countryCode": "BFA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 15995313
+  },
+  {
+    "country": "Malawi",
+    "countryCode": "MWI",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 0,
+    "population": 15457531
+  },
+  {
+    "country": "Ecuador",
+    "countryCode": "ECU",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 4,
+    "socialAchieved": 3,
+    "population": 15246481
+  },
+  {
+    "country": "Guatemala",
+    "countryCode": "GTM",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 1,
+    "population": 14706578
+  },
+  {
+    "country": "Cambodia",
+    "countryCode": "KHM",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 14605862
+  },
+  {
+    "country": "Mali",
+    "countryCode": "MLI",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 14416737
+  },
+  {
+    "country": "Zambia",
+    "countryCode": "ZMB",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 0,
+    "population": 13633796
+  },
+  {
+    "country": "Senegal",
+    "countryCode": "SEN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 0,
+    "population": 13330737
+  },
+  {
+    "country": "Chad",
+    "countryCode": "TCD",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 0,
+    "population": 12080037
+  },
+  {
+    "country": "Guinea",
+    "countryCode": "GIN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 11161530
+  },
+  {
+    "country": "Rwanda",
+    "countryCode": "RWA",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 1,
+    "population": 11144315
+  },
+  {
+    "country": "Greece",
+    "countryCode": "GRC",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 7,
+    "socialAchieved": 6,
+    "population": 11123213
+  },
+  {
+    "country": "Belgium",
+    "countryCode": "BEL",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 10,
+    "population": 11047744
+  },
+  {
+    "country": "Tunisia",
+    "countryCode": "TUN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 4,
+    "population": 10673800
+  },
+  {
+    "country": "Portugal",
+    "countryCode": "PRT",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 7,
+    "socialAchieved": 7,
+    "population": 10557560
+  },
+  {
+    "country": "Czech Republic",
+    "countryCode": "CZE",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 9,
+    "population": 10496088
+  },
+  {
+    "country": "Bolivia",
+    "countryCode": "BOL",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 2,
+    "socialAchieved": 1,
+    "population": 10324445
+  },
+  {
+    "country": "Dominican Republic",
+    "countryCode": "DOM",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 3,
+    "socialAchieved": 2,
+    "population": 10147598
+  },
+  {
+    "country": "Hungary",
+    "countryCode": "HUN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 7,
+    "population": 9971727
+  },
+  {
+    "country": "Benin",
+    "countryCode": "BEN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 9779795
+  },
+  {
+    "country": "Sweden",
+    "countryCode": "SWE",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 10,
+    "population": 9449213
+  },
+  {
+    "country": "Austria",
+    "countryCode": "AUT",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 11,
+    "population": 8391643
+  },
+  {
+    "country": "Tajikistan",
+    "countryCode": "TJK",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 2,
+    "population": 7814850
+  },
+  {
+    "country": "Honduras",
+    "countryCode": "HND",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 7776669
+  },
+  {
+    "country": "Israel",
+    "countryCode": "ISR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 8,
+    "population": 7765800
+  },
+  {
+    "country": "Bulgaria",
+    "countryCode": "BGR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 6,
+    "population": 7348328
+  },
+  {
+    "country": "Paraguay",
+    "countryCode": "PRY",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 4,
+    "population": 6573097
+  },
+  {
+    "country": "Lao PDR",
+    "countryCode": "LAO",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 6521314
+  },
+  {
+    "country": "Togo",
+    "countryCode": "TGO",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 0,
+    "socialAchieved": 0,
+    "population": 6472304
+  },
+  {
+    "country": "El Salvador",
+    "countryCode": "SLV",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 2,
+    "socialAchieved": 1,
+    "population": 6256242
+  },
+  {
+    "country": "Jordan",
+    "countryCode": "JOR",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 2,
+    "socialAchieved": 4,
+    "population": 6181000
+  },
+  {
+    "country": "Sierra Leone",
+    "countryCode": "SLE",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 1,
+    "population": 5865491
+  },
+  {
+    "country": "Denmark",
+    "countryCode": "DNK",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 10,
+    "population": 5570572
+  },
+  {
+    "country": "Kyrgyz Republic",
+    "countryCode": "KGZ",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 3,
+    "population": 5514600
+  },
+  {
+    "country": "Slovak Republic",
+    "countryCode": "SVK",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 8,
+    "population": 5398384
+  },
+  {
+    "country": "Finland",
+    "countryCode": "FIN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 10,
+    "population": 5388272
+  },
+  {
+    "country": "Costa Rica",
+    "countryCode": "CRI",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 6,
+    "population": 4737680
+  },
+  {
+    "country": "Ireland",
+    "countryCode": "IRL",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 9,
+    "population": 4576794
+  },
+  {
+    "country": "Georgia",
+    "countryCode": "GEO",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 3,
+    "socialAchieved": 2,
+    "population": 4483350
+  },
+  {
+    "country": "Central African Republic",
+    "countryCode": "CAF",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 1,
+    "socialAchieved": 0,
+    "population": 4436217
+  },
+  {
+    "country": "New Zealand",
+    "countryCode": "NZL",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 8,
+    "population": 4384000
+  },
+  {
+    "country": "Croatia",
+    "countryCode": "HRV",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 7,
+    "population": 4280622
+  },
+  {
+    "country": "Panama",
+    "countryCode": "PAN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 4,
+    "population": 3740282
+  },
+  {
+    "country": "Mauritania",
+    "countryCode": "MRT",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 2,
+    "socialAchieved": 1,
+    "population": 3702763
+  },
+  {
+    "country": "Uruguay",
+    "countryCode": "URY",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 7,
+    "population": 3383486
+  },
+  {
+    "country": "Kuwait",
+    "countryCode": "KWT",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 5,
+    "population": 3124705
+  },
+  {
+    "country": "Lithuania",
+    "countryCode": "LTU",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 5,
+    "population": 3028115
+  },
+  {
+    "country": "Armenia",
+    "countryCode": "ARM",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 4,
+    "socialAchieved": 4,
+    "population": 2964120
+  },
+  {
+    "country": "Albania",
+    "countryCode": "ALB",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 4,
+    "population": 2904780
+  },
+  {
+    "country": "Mongolia",
+    "countryCode": "MNG",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 3,
+    "population": 2754209
+  },
+  {
+    "country": "Latvia",
+    "countryCode": "LVA",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 4,
+    "population": 2059709
+  },
+  {
+    "country": "Slovenia",
+    "countryCode": "SVN",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 9,
+    "population": 2052843
+  },
+  {
+    "country": "Lesotho",
+    "countryCode": "LSO",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 3,
+    "socialAchieved": 0,
+    "population": 2029516
+  },
+  {
+    "country": "Trinidad and Tobago",
+    "countryCode": "TTO",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 5,
+    "population": 1333082
+  },
+  {
+    "country": "Estonia",
+    "countryCode": "EST",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 8,
+    "population": 1327439
+  },
+  {
+    "country": "Mauritius",
+    "countryCode": "MUS",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 4,
+    "population": 1252404
+  },
+  {
+    "country": "Swaziland",
+    "countryCode": "SWZ",
+    "nBio": 7,
+    "nSocial": 10,
+    "biophysicalTransgressed": 5,
+    "socialAchieved": 0,
+    "population": 1212159
+  },
+  {
+    "country": "Cyprus",
+    "countryCode": "CYP",
+    "nBio": 7,
+    "nSocial": 11,
+    "biophysicalTransgressed": 6,
+    "socialAchieved": 7,
+    "population": 1116513
+  }
+]

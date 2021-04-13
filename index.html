@@ -1,10 +1,24 @@
 <html>
     <head>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        Hello world.
         <div id="container">
-            <svg></svg>
+            <svg width="800" height="800">
+                <defs>
+                    <pattern id="nmac" patternUnits="objectBoundingBox" height="1" width="2">
+                        <image x="-30" y="-5" height="100" width="160" xlink:href="./static/nmac.svg"></image>
+                    </pattern>
+                    <pattern id="eu" patternUnits="objectBoundingBox" height="1" width="1.5">
+                        <image x="-30" y="-5" height="100" width="150" xlink:href="./static/eu.svg"></image>
+                    </pattern>
+                    <pattern id="uk" patternUnits="objectBoundingBox" height="1" width="2">
+                        <image x="-30" y="-5" height="100" width="150" xlink:href="./static/uk.svg"></image>
+                    </pattern>
+                </defs>
+                <g transform="translate(400, 400)"></g>
+            </svg>
+            <button id='transition-from-doughnut'>To Chart</button>
             </div>
             <script src="index.js"></script>
     </body>
