@@ -448,27 +448,29 @@ const radius = Math.min(width, height) / 2,
         .range(d3.schemeCategory10)
     const quadrantGroup = svg.append('g').attr('class', 'quadrants-group')
     // .attr('transform', `translate(${margin.left,margin.top})`)
+    const viewportWidth = width - margin.right - margin.left;
+    const viewportHeight = height - margin.bottom - margin.top;
 
     quadrantGroup.selectAll('g')
         .data(quadrantData)
         .join('g')
         .style('opacity', 0)
             .append('rect')
-            .attr('width', width / 2)
-            .attr('height', height / 2)
+            .attr('width', viewportWidth / 2)
+            .attr('height', viewportHeight / 2)
             .attr('fill-opacity', 0.4)
             .attr('fill', (d) => color(`${d.impact}-${d.dev}`))
-            .attr('x', (d, i) => i % 2 ? width / 2 : 0)
-            .attr('y', (d, i) => i > 1 ? height / 2 : 0)
+            .attr('x', (d, i) => i % 2 ? viewportWidth / 2 + margin.left : margin.left)
+            .attr('y', (d, i) => i > 1 ? viewportHeight  / 2 + margin.top : margin.top)
     quadrantGroup.selectAll('g')
         .attr("font-size", 18)
         .attr("text-anchor", "middle")
             .append("text")
                 .attr("font-weight", "bold")
                 .attr('x', (d, i) => {
-                    return (i % 2 ? width / 2 : 0) + width / 4
+                    return (i % 2 ? viewportWidth / 2 : 0) + viewportWidth / 4
                 })
-                .attr('y', (d, i) => (i > 1 ? height / 2 : 0) + height / 4)
+                .attr('y', (d, i) => (i > 1 ? viewportHeight / 2 : 0) + viewportHeight / 4)
                 .attr('fill', 'white')
                 .call(text => {
                     text.append('tspan')
