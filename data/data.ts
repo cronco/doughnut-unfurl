@@ -1,16 +1,16 @@
-interface DoughnutData {
+export interface DoughnutData {
     name: string;
     value: number;
     full?: boolean;
 }
 
-interface StylizedCircle {
+export interface StylizedCircle {
     name: string;
     biophysicalTransgressed: number;
     socialAchieved: number;
 }
 
-interface Quadrant {
+export interface Quadrant {
     name?: string;
     impact: string;
     dev: string;

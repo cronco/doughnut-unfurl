@@ -2,11 +2,11 @@
   "name": "doughnut-unfurl",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build index.html",
-    "dev": "parcel index.html"
+    "dev": "parcel index.html testCircle.html"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "flubber": "^0.4.2"
   },
   "devDependencies": {
+    "@types/d3": "^6.3.0",
     "parcel-plugin-static-files-copy": "^2.6.0",
     "typescript": "^4.2.4"
   },

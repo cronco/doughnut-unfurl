@@ -3,17 +3,9 @@ import { interpolate } from 'flubber';
 import addHiddenDonutArc from './src/addHiddenDonutArc';
 import countryData from './data/countryData.json';
 import {
-    ecologicalData, socialShortfallData, stylizedCircles,
-quadrantData,} from './data/data'
-// import nmac from './data/nmac.svg';
-// import eu from './data/eu.svg';
-// import uk from './data/uk.svg';
-
-// const flags = {
-//     nmac,
-//     eu,
-//     uk
-// };
+    ecologicalData, socialShortfallData, stylizedCircles, quadrantData, Quadrant, StylizedCircle, DoughnutData,
+} from './data/data'
+import { PieArcDatum } from 'd3';
 
 
 let transitionedFromDoughnut = false;
@@ -30,7 +22,7 @@ const viewportHeight = height - margin.bottom - margin.top;
 let circles;
 
 
-const pie = d3.pie()
+const pie = d3.pie<DoughnutData>()
     .padAngle(padAngle)
     .value(1);
 
@@ -38,14 +30,14 @@ const planetaryBoundariesRadius = Math.min(width, height) / 3;
 const socialFoundationRadius = planetaryBoundariesRadius / 1.47;
 // console.log('planetarbyBoundariesRadius', planetaryBoundariesRadius, 'socialFoundation ', socialFoundationRadius)
 const socialShortfallArcFun =
-    d3.arc()
-    .innerRadius(() => 100 + Math.random() * (socialFoundationRadius - 100) )
+    d3.arc<PieArcDatum<DoughnutData>>()
+    .innerRadius(() => 100 + Math.random() * (socialFoundationRadius - 100))
     .outerRadius( socialFoundationRadius)
 
-const socialBasisFoundationArcFun = d3.arc()
+const socialBasisFoundationArcFun = d3.arc<PieArcDatum<DoughnutData>>()
     .innerRadius(10).outerRadius(socialFoundationRadius);
 
-const insidePlanetaryBoundariesArcFun = d3.arc()
+const insidePlanetaryBoundariesArcFun = d3.arc<PieArcDatum<DoughnutData>>()
     .innerRadius(socialFoundationRadius)
     .outerRadius(
         (d) => {
@@ -55,7 +47,7 @@ const insidePlanetaryBoundariesArcFun = d3.arc()
             return socialFoundationRadius + 40 + Math.random() * (planetaryBoundariesRadius - socialFoundationRadius - 40);
         }
     )
-const outsidePlanetaryBoundariesArcFun = d3.arc()
+const outsidePlanetaryBoundariesArcFun = d3.arc<PieArcDatum<DoughnutData>>()
     .innerRadius(planetaryBoundariesRadius)
     .outerRadius(
         (d) => {
@@ -77,17 +69,17 @@ const doughnutThresholds = svg
     .append('g')
     .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-const smallCircle = d3.arc()
+const smallCircle = d3.arc<PieArcDatum<DoughnutData>>()
     .innerRadius(socialFoundationRadius - 20)
     .outerRadius(socialFoundationRadius)
     .startAngle(Math.PI).endAngle(Math.PI * 3)
 
-const largeCircle = d3.arc()
+const largeCircle = d3.arc<PieArcDatum<DoughnutData>>()
     .innerRadius(planetaryBoundariesRadius - 20)
     .outerRadius(planetaryBoundariesRadius)
     .startAngle(Math.PI).endAngle(Math.PI * 3)
 
-const socialThresholdCircle = doughnutThresholds.data([{value: 1}])
+const socialThresholdCircle = doughnutThresholds
     .append('path')
     .attr('class',  'social-threshold')
     .attr('d', smallCircle)
@@ -98,7 +90,7 @@ const socialThresholdCircle = doughnutThresholds.data([{value: 1}])
         return addHiddenDonutArc(this, svg, "social-threshold-text-arc")
 });
 
-const planetaryThresholdCircle = doughnutThresholds.data([{value: 1}])
+const planetaryThresholdCircle = doughnutThresholds
     .append('path')
     .attr('class',  'planetary-threshold')
     .attr('d', largeCircle)
@@ -210,30 +202,30 @@ const y = d3.scaleLinear()
     .range([height - margin.bottom, margin.top])
 const x = d3.scaleLinear()
     .domain([0, ecologicalData.length])
-    .range([margin.left, width - margin.right]);
+    .range([0, width - margin.right]);
 const z = d3.scaleLinear()
     .domain(d3.extent(countryData.map(_ => _.population)))
     .range([4, 50]);
 
 const xAxis = g => g
-.attr("transform", `translate(${margin.left}, ${height - margin.bottom})`)
-.style('opacity', 0)
-.call(d3.axisBottom(x).ticks(ecologicalData.length))
-.call(g => g.select(".domain").remove())
-.call(g => g.append("text")
-    .attr("x", width - margin.right - 20)
-    .attr("y", margin.bottom - 4)
-    .attr("fill", "currentColor")
-    .attr("text-anchor", "end")
-    .attr('font-size', 14)
-    .text('Ecological Thresholds Passed'))
+    .attr("transform", `translate(${margin.left}, ${height - margin.bottom})`)
+    .style('opacity', 0)
+    .call(d3.axisBottom(x).ticks(ecologicalData.length))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.append("text")
+        .attr("x", width - margin.right - 20)
+        .attr("y", margin.bottom - 4)
+        .attr("fill", "currentColor")
+        .attr("text-anchor", "end")
+        .attr('font-size', 14)
+        .text('Ecological Thresholds Passed'))
 
 const yAxis = g => g
-.attr("transform", `translate(${margin.left},0)`)
-.style('opacity', 0)
-.call(d3.axisLeft(y).ticks(socialShortfallData.length))
-.call(g => g.select(".domain").remove())
-.call(g => g.append("text")
+    .attr("transform", `translate(${margin.left},0)`)
+    .style('opacity', 0)
+    .call(d3.axisLeft(y).ticks(socialShortfallData.length))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.append("text")
     .attr("x", -margin.left)
     .attr("y", 10)
     .attr("fill", "currentColor")
@@ -244,52 +236,87 @@ const gx = svg.append("g").attr('class', 'x-axis')
 
 const gy = svg.append("g").attr('class', 'y-axis');
 const gridGroup = svg.append("g");
-const color = d3.scaleOrdinal().domain(quadrantData.map(_ => `${_.impact}-${_.dev}`))
+const color = d3.scaleOrdinal()
+    .domain(quadrantData.map(_ => `${_.impact}-${_.dev}`))
     .range(d3.schemeCategory10)
 const quadrantGroup = svg.append('g').attr('class', 'quadrants-group')
 
 const transitionFromDoughnut = async () => {
 
-const grid = g => g
-    .attr("stroke", "currentColor")
-    .attr("stroke-opacity", 0.1)
-    .call(g => g.append("g")
-    .selectAll("line")
-    .data(x.ticks())
-    .join("line")
-        .attr('class', 'x-grid')
-        .style('opacity', 0)
-        .attr("x1", d => 0.5 + x(d))
-        .attr("x2", d => 0.5 + x(d))
-        .attr("y1", margin.top)
-        .attr("y2", height - margin.bottom))
-    .call(g => g.append("g")
-    .selectAll("line")
-    .data(y.ticks())
-    .join("line")
-        .attr('class', 'y-grid')
-        .style('opacity', 0)
-        .attr("y1", d => 0.5 + y(d))
-        .attr("y2", d => 0.5 + y(d))
-        .attr("x1", margin.left)
-        .attr("x2", width - margin.right));
+    if (transitionedFromDoughnut) return;
+    const grid = g => g
+        .attr("stroke", "currentColor")
+        .attr("stroke-opacity", 0.1)
+        .call(g => g.append("g")
+        .selectAll("line")
+        .data(x.ticks())
+        .join("line")
+            .attr('class', 'x-grid')
+            .style('opacity', 0)
+            .attr("x1", d => 0.5 + x(d))
+            .attr("x2", d => 0.5 + x(d))
+            .attr("y1", margin.top)
+            .attr("y2", height - margin.bottom))
+        .call(g => g.append("g")
+        .selectAll("line")
+        .data(y.ticks())
+        .join("line")
+            .attr('class', 'y-grid')
+            .style('opacity', 0)
+            .attr("y1", d => 0.5 + y(d))
+            .attr("y2", d => 0.5 + y(d))
+            .attr("x1", margin.left)
+            .attr("x2", width - margin.right));
 
 
     gx.call(xAxis);
     gy.call(yAxis);
+    const circleInterpolator = (arcFun: d3.Arc) => {
+        console.log(arcFun, arcFun.innerRadius()(), arcFun.outerRadius()())
+        const innerRad = arcFun.innerRadius()(),
+            outerRad = arcFun.outerRadius()();
+        return (t: number) => {
 
+            const newArcFun = d3.arc();
+            newArcFun.innerRadius(innerRad + (200 + outerRad - innerRad) * t)
+            .outerRadius(outerRad + 200 * t)
+            .startAngle(Math.PI - Math.PI / 16 * t)
+            .endAngle(Math.PI * 3 - Math.PI * 2 * t);
+            // console.log(t, arcFun.innerRadius(), newArcFun.innerRadius())
+        return newArcFun();
+
+        }
+    };
+
+    const coordRegex = /translate\((-?\d*\.?\d*),(-?\d*\.?\d*)\)/;
     let animationPromises = [];
     animationPromises = animationPromises.concat(
-        planetaryThresholdCircle.transition().duration(400).style('opacity', 0).end(),
+        doughnutThresholds.selectAll('text').transition().duration(400).style('opacity', 0).end(),
+        planetaryThresholdCircle.transition().duration(1200)
+        .attrTween('d',function (d, i) {
+
+            return circleInterpolator(largeCircle);
+            // return interpolate(largeCircle(d), [
+            //     [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
+            //     [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
+            //     );
+        })
+        .attrTween('transform', (d, i) => {
+            return (t) => `translate(${t * (-400 + margin.left)}, ${t * - 100}) scale(${1 + t * 14}, ${1 - t * 0.0})`
+        })
+            .attr('fill', 'black')
+            .attr('stroke', 'black')
+            .attr('stroke-width', 1)
+            // .attrTween('stroke', () => d3.interpolateRgb('green', 'black'))
+            .end(),
         socialFoundationLabels.transition().duration(400).style('opacity', 0).end(),
         planetaryBoundariesLabels.transition().duration(400).style('opacity', 0).end(),
         socialThresholdCircle.transition().duration(400).style('opacity', 0).end()
     );
-    const coordRegex = /translate\((-?\d*\.?\d*),(-?\d*\.?\d*)\)/;
     let planetaryArcsAnimation =
         g.selectAll('path.planetary-arc').transition()
         .delay((d, i) => 50 * i)
-        .duration(300)
+        .duration(400)
         .attrTween('fill', () => d3.interpolateRgb('lightgreen', 'black'))
         .attrTween('stroke', () => d3.interpolateRgb('lightgreen', 'black'))
         .attrTween('d',function (d, i) {
@@ -300,7 +327,7 @@ const grid = g => g
             const coordinates = coordRegex.exec(tick.attr('transform'));
             const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
 
-            return interpolate(socialBasisFoundationArcFun(d), [
+            return interpolate(insidePlanetaryBoundariesArcFun(d), [
                 [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
                 [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
                 );
@@ -319,7 +346,7 @@ const grid = g => g
             const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
 
 
-            return interpolate(socialBasisFoundationArcFun(d), [
+            return interpolate(outsidePlanetaryBoundariesArcFun(d), [
                 [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
                 [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
                 );
@@ -407,8 +434,7 @@ const grid = g => g
         .attr('cx', d => x(d.biophysicalTransgressed))
         .attr('cy', d => y(d.socialAchieved));
     animationPromises.push(
-    circles
-        .transition().delay((d, i) => 1700 + 10 * i).duration(200).style('opacity', 1).end()
+        circles.transition().delay((d, i) => 1700 + 10 * i).duration(200).style('opacity', 1).end()
     );
 
                 // firstTransition.then(
@@ -442,17 +468,19 @@ const grid = g => g
                 //     .delay(1000).end()
                 // ))
 
-    return Promise.all(animationPromises)
+    transitionedFromDoughnut = true;
+    return Promise.all(animationPromises);
 };
 
 const transitionFromChartToQuadrants = async () => {
-    let transition = new Promise((resolve, reject) => {
-        resolve();
+    let transition = new Promise((resolve) => {
+        resolve(true);
     });
     if (!transitionedFromDoughnut) {
         transition = transitionFromDoughnut();
     }
     await transition;
+
     quadrantGroup.selectAll('g')
         .data(quadrantData)
         .join('g')
@@ -477,9 +505,9 @@ const transitionFromChartToQuadrants = async () => {
                 .call(text => {
                     text.append('tspan')
                     .style("text-anchor","middle")
-                    .text((d, i) => d.impact)
+                    .text((d: Quadrant, i) => d.impact)
                     text.append('tspan')
-                    .text((d, i) => d.dev)
+                    .text((d: Quadrant, i) => d.dev)
                     .style("text-anchor","middle")
                     .attr('dy', 18)
                     .attr('x', (d, i) => `${50 + (i % 2 ? 25 : -25)}%`)
@@ -504,7 +532,7 @@ const transitionFromChartToQuadrants = async () => {
 
     const firstTransition = flagsGroup.selectAll('circle')
         .transition()
-            .attr('cx', (d) => (
+            .attr('cx', (d: StylizedCircle) => (
                 d.name !== 'nmac' ? x(d.biophysicalTransgressed - 3) :
                 x(d.biophysicalTransgressed + 1))
             )
@@ -520,3 +548,4 @@ const transitionFromChartToQuadrants = async () => {
 
     document.getElementById('transition-from-doughnut').addEventListener('click', transitionFromDoughnut)
     document.getElementById('transition-from-chart').addEventListener('click', transitionFromChartToQuadrants)
+    // document.getElementById('transition-to-stylised-circles').addEventListener('click', transitionFromQuadrantsToStylisedCircles);
