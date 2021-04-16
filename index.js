@@ -2,6 +2,9 @@ import * as d3 from 'd3';
 import { interpolate } from 'flubber';
 import addHiddenDonutArc from './src/addHiddenDonutArc';
 import countryData from './data/countryData.json';
+import {
+    ecologicalData, socialShortfallData, stylizedCircles,
+quadrantData,} from './data/data'
 // import nmac from './data/nmac.svg';
 // import eu from './data/eu.svg';
 // import uk from './data/uk.svg';
@@ -26,31 +29,6 @@ const viewportWidth = width - margin.right - margin.left;
 const viewportHeight = height - margin.bottom - margin.top;
 let circles;
 
-const ecologicalData = [
-    {name: "climate change", value: 0.01, full: true},
-    {name: "ocean acidification", value: 0.02},
-    {name: "chemical pollution", value: 0.03},
-    {name: "nitrogen & phosphorus", value: 0.01},
-    {name: "freshwater withdrawals", value: 0.01, full: true},
-    {name: "land conversion", value: 0.01},
-    {name: "biodiversity loss", value: 0.01, full: true},
-    {name: "air pollution", value: 0.01},
-    {name: "ozone layer depletion", value: 0.01},
-]
-const socialShortfallData = [
-    {name: "water", value: 0.03},
-    {name: "food", value: 0.04},
-    {name: "health", value: 0.05},
-    {name: "education", value: 0.06},
-    {name: "income & work", value: 0.06},
-    {name: "peace & justice", value: 0.04},
-    {name: "political voice", value: 0.05},
-    {name: "social equity", value: 0.05},
-    {name: "gender equality", value: 0.05},
-    {name: "housing", value: 0.06},
-    {name: "networks", value: 0.010},
-    { name: "energy", value: 0.016 },
-];
 
 const pie = d3.pie()
     .padAngle(padAngle)
@@ -266,21 +244,11 @@ const gx = svg.append("g").attr('class', 'x-axis')
 
 const gy = svg.append("g").attr('class', 'y-axis');
 const gridGroup = svg.append("g");
-const quadrantData = [
-    {
-        impact: 'Low Impact',
-        dev:'High Development',
-    },
-    {impact: 'High Impact',
-    dev: 'High Development'},
-    {impact: 'Low Impact', dev:'Low Development'},
-    {impact: 'High Impact', dev: 'Low Development'}
-];
 const color = d3.scaleOrdinal().domain(quadrantData.map(_ => `${_.impact}-${_.dev}`))
     .range(d3.schemeCategory10)
 const quadrantGroup = svg.append('g').attr('class', 'quadrants-group')
 
-const transitionFromDoughnut = () => {
+const transitionFromDoughnut = async () => {
 
 const grid = g => g
     .attr("stroke", "currentColor")
@@ -310,8 +278,6 @@ const grid = g => g
     gx.call(xAxis);
     gy.call(yAxis);
 
-
-
     let animationPromises = [];
     animationPromises = animationPromises.concat(
         planetaryThresholdCircle.transition().duration(400).style('opacity', 0).end(),
@@ -320,51 +286,7 @@ const grid = g => g
         socialThresholdCircle.transition().duration(400).style('opacity', 0).end()
     );
     const coordRegex = /translate\((-?\d*\.?\d*),(-?\d*\.?\d*)\)/;
-
-    animationPromises.push(
-        g.selectAll('path.social-arc').transition()
-        .delay((d, i) => 50 * i)
-        .duration(300)
-        .attrTween('fill', () => d3.interpolateRgb('lightblue', 'black'))
-        .attrTween('stroke', () => d3.interpolateRgb('lightblue', 'black'))
-        .attrTween('d',function (d, i) {
-            const yTicks = gy.selectAll('.tick');
-            const tick = d3.select(yTicks._groups[0][i]);
-            const nextTick = d3.select(yTicks._groups[0][ i+1 ]);
-
-            const coordinates = coordRegex.exec(tick.attr('transform'));
-            const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
-
-            return interpolate(socialBasisFoundationArcFun(d), [
-                [parseInt(coordinates[1]) - 400 + margin.left, parseInt(coordinates[2]) - 400],
-                [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400]]
-                );
-    }).end());
-
-    animationPromises.push(
-        g.selectAll('path.social-shortfall-arc').transition()
-        .delay((d, i) => 50 * i)
-        .duration(300)
-        .attrTween('fill', () => d3.interpolateRgb('red', 'black'))
-        .attrTween('stroke', () => d3.interpolateRgb('red', 'black'))
-        .attrTween('d',function (d, i) {
-            const firstYGrid = gridGroup.select('.y-grid');
-            const yTicks = gy.selectAll('.tick');
-            const tick = d3.select(yTicks._groups[0][i]);
-            const nextTick = d3.select(yTicks._groups[0][ i+1 ]);
-
-            const coordinates = coordRegex.exec(tick.attr('transform'));
-            const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
-
-
-            return interpolate(socialBasisFoundationArcFun(d), [
-                [parseInt(coordinates[1])- 400 + margin.left, parseInt(coordinates[2]) - 400],
-                [parseInt(nextCoordinates[1])- 400 + margin.left, parseInt(nextCoordinates[2]) - 400]]
-                );
-        }).end()
-    );
-
-    animationPromises.push(
+    let planetaryArcsAnimation =
         g.selectAll('path.planetary-arc').transition()
         .delay((d, i) => 50 * i)
         .duration(300)
@@ -378,14 +300,12 @@ const grid = g => g
             const coordinates = coordRegex.exec(tick.attr('transform'));
             const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
 
-
             return interpolate(socialBasisFoundationArcFun(d), [
                 [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
                 [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
                 );
-        }).end()
-    );
-    animationPromises.push(
+        }).end();
+    let planetaryOvershootArcsAnimation =
         g.selectAll('path.planetary-overshoot-arc').transition()
         .delay((d, i) => 50 * i)
         .duration(300)
@@ -404,7 +324,62 @@ const grid = g => g
                 [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
                 );
         }).end()
+
+    let xAxisAnimation =
+        gx.transition()
+        .duration(300)
+        .delay(1000)
+        .style('opacity', 1).end()
+
+    animationPromises.push(
+        planetaryArcsAnimation, planetaryOvershootArcsAnimation, xAxisAnimation
     );
+
+    await Promise.all([planetaryArcsAnimation, planetaryOvershootArcsAnimation, xAxisAnimation]);
+    let socialArcsAnimation =
+        g.selectAll('path.social-arc').transition()
+        .delay((d, i) => 50 * i)
+        .duration(300)
+        .attrTween('fill', () => d3.interpolateRgb('lightblue', 'black'))
+        .attrTween('stroke', () => d3.interpolateRgb('lightblue', 'black'))
+        .attrTween('d',function (d, i) {
+            const yTicks = gy.selectAll('.tick');
+            const tick = d3.select(yTicks._groups[0][i]);
+            const nextTick = d3.select(yTicks._groups[0][ i+1 ]);
+
+            const coordinates = coordRegex.exec(tick.attr('transform'));
+            const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
+
+            return interpolate(socialBasisFoundationArcFun(d), [
+                [parseInt(coordinates[1]) - 400 + margin.left, parseInt(coordinates[2]) - 400],
+                [parseInt(nextCoordinates[1]) - 400 + margin.left, parseInt(nextCoordinates[2]) - 400]]
+                );
+    }).end();
+    let socialShortfallArcsAnimation =
+        g.selectAll('path.social-shortfall-arc').transition()
+        .delay((d, i) => 50 * i)
+        .duration(300)
+        .attrTween('fill', () => d3.interpolateRgb('red', 'black'))
+        .attrTween('stroke', () => d3.interpolateRgb('red', 'black'))
+        .attrTween('d',function (d, i) {
+            const yTicks = gy.selectAll('.tick');
+            const tick = d3.select(yTicks._groups[0][i]);
+            const nextTick = d3.select(yTicks._groups[0][ i+1 ]);
+
+            const coordinates = coordRegex.exec(tick.attr('transform'));
+            const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
+
+
+            return interpolate(socialBasisFoundationArcFun(d), [
+                [parseInt(coordinates[1])- 400 + margin.left, parseInt(coordinates[2]) - 400],
+                [parseInt(nextCoordinates[1])- 400 + margin.left, parseInt(nextCoordinates[2]) - 400]]
+                );
+        }).end()
+
+    animationPromises.push(
+        socialArcsAnimation, socialShortfallArcsAnimation
+    );
+
     gridGroup.call(grid);
     animationPromises.push(
         gridGroup.selectAll('line').transition()
@@ -412,12 +387,6 @@ const grid = g => g
         .delay((d, i) => i * 100)
         .style('opacity', 1).end()
     )
-    animationPromises.push(
-        gx.transition()
-        .duration(300)
-        .delay(1000)
-        .style('opacity', 1).end()
-    );
     animationPromises.push(
     gy.transition()
         .duration(300)
@@ -519,23 +488,6 @@ const transitionFromChartToQuadrants = async () => {
     quadrantGroup.selectAll('g').transition()
         .delay((d, i) => 200 * i).duration(300)
         .style('opacity', 1)
-    const stylizedCircles = [
-        {
-            name: 'nmac',
-            biophysicalTransgressed: 6,
-            socialAchieved: 3
-        },
-        {
-            name: 'eu',
-            biophysicalTransgressed: 6,
-            socialAchieved: 9
-        },
-        {
-            name: 'uk',
-            biophysicalTransgressed: 5,
-            socialAchieved: 8
-        },
-    ]
     const flagsGroup = svg.append('g').attr('transform', `translate(${margin.left,0})`);
     flagsGroup.selectAll('circle').data(stylizedCircles)
         .join('circle')
