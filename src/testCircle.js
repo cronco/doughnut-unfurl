@@ -33,6 +33,8 @@ const transition = () => {
         .attrTween('d', function(d, i) {
             return interpolator(arc)
         })
+        arcSVG.transition().duration(1000)
+        .delay(600)
 
 };
 document.getElementById('transition').addEventListener('click', transition);

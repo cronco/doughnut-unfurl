@@ -5,7 +5,7 @@ import countryData from './data/countryData.json';
 import {
     ecologicalData, socialShortfallData, stylizedCircles, quadrantData, Quadrant, StylizedCircle, DoughnutData,
 } from './data/data'
-import { PieArcDatum } from 'd3';
+import { PieArcDatum, style } from 'd3';
 
 
 let transitionedFromDoughnut = false;
@@ -175,6 +175,7 @@ const socialFoundationLabels = svg.append("g")
     .attr("font-family", "sans-serif")
     .attr("font-size", 8)
     .attr("text-anchor", "middle")
+
     .selectAll("text")
     .data(socialPie)
     .join("text")
@@ -182,7 +183,8 @@ const socialFoundationLabels = svg.append("g")
     .call(text => text.append("tspan")
     //   .attr("y", "-0.4em")
         .attr("font-weight", "bold")
-        .text(d => d.data.name));
+        .text(d => d.data.name))
+    .style('opacity', 0)
 const planetaryBoundariesLabels = svg.append("g")
     .attr('transform', `translate(${width / 2}, ${height / 2})`)
     .attr("font-family", "sans-serif")
@@ -195,20 +197,21 @@ const planetaryBoundariesLabels = svg.append("g")
     .call(text => text.append("tspan")
     //   .attr("y", "-0.4em")
         .attr("font-weight", "bold")
-        .text(d => d.data.name));
+        .text(d => d.data.name))
+    .style('opacity', 0)
 
 const y = d3.scaleLinear()
     .domain([0, socialShortfallData.length])
     .range([height - margin.bottom, margin.top])
 const x = d3.scaleLinear()
     .domain([0, ecologicalData.length])
-    .range([0, width - margin.right]);
+    .range([margin.left, width - margin.right]);
 const z = d3.scaleLinear()
     .domain(d3.extent(countryData.map(_ => _.population)))
     .range([4, 50]);
 
 const xAxis = g => g
-    .attr("transform", `translate(${margin.left}, ${height - margin.bottom})`)
+    .attr("transform", `translate(0, ${height - margin.bottom})`)
     .style('opacity', 0)
     .call(d3.axisBottom(x).ticks(ecologicalData.length))
     .call(g => g.select(".domain").remove())
@@ -240,6 +243,7 @@ const color = d3.scaleOrdinal()
     .domain(quadrantData.map(_ => `${_.impact}-${_.dev}`))
     .range(d3.schemeCategory10)
 const quadrantGroup = svg.append('g').attr('class', 'quadrants-group')
+let flagsGroup;
 
 const transitionFromDoughnut = async () => {
 
@@ -253,8 +257,8 @@ const transitionFromDoughnut = async () => {
         .join("line")
             .attr('class', 'x-grid')
             .style('opacity', 0)
-            .attr("x1", d => 0.5 + x(d))
-            .attr("x2", d => 0.5 + x(d))
+            .attr("x1", d => 0.5 + x(d) )
+            .attr("x2", d => 0.5 + x(d) )
             .attr("y1", margin.top)
             .attr("y2", height - margin.bottom))
         .call(g => g.append("g")
@@ -272,14 +276,13 @@ const transitionFromDoughnut = async () => {
     gx.call(xAxis);
     gy.call(yAxis);
     const circleInterpolator = (arcFun: d3.Arc) => {
-        console.log(arcFun, arcFun.innerRadius()(), arcFun.outerRadius()())
         const innerRad = arcFun.innerRadius()(),
             outerRad = arcFun.outerRadius()();
         return (t: number) => {
 
             const newArcFun = d3.arc();
-            newArcFun.innerRadius(innerRad + (200 + outerRad - innerRad) * t)
-            .outerRadius(outerRad + 200 * t)
+            newArcFun.innerRadius(innerRad + (2500 + outerRad - innerRad) * t)
+            .outerRadius(outerRad + 2500 * t)
             .startAngle(Math.PI - Math.PI / 16 * t)
             .endAngle(Math.PI * 3 - Math.PI * 2 * t);
             // console.log(t, arcFun.innerRadius(), newArcFun.innerRadius())
@@ -296,13 +299,9 @@ const transitionFromDoughnut = async () => {
         .attrTween('d',function (d, i) {
 
             return circleInterpolator(largeCircle);
-            // return interpolate(largeCircle(d), [
-            //     [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
-            //     [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
-            //     );
         })
         .attrTween('transform', (d, i) => {
-            return (t) => `translate(${t * (-400 + margin.left)}, ${t * - 100}) scale(${1 + t * 14}, ${1 - t * 0.0})`
+            return (t) => `translate(${t * (-400 + margin.left)}, ${t * - 2400}) scale(${1 + t * 5.5}, ${1 - t * 0.0})`
         })
             .attr('fill', 'black')
             .attr('stroke', 'black')
@@ -328,7 +327,7 @@ const transitionFromDoughnut = async () => {
             const nextCoordinates = coordRegex.exec(nextTick.attr('transform'));
 
             return interpolate(insidePlanetaryBoundariesArcFun(d), [
-                [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
+                [parseInt(coordinates[1]) -400, parseInt(coordinates[2]) - 400 + height - margin.bottom],
                 [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
                 );
         }).end();
@@ -347,7 +346,7 @@ const transitionFromDoughnut = async () => {
 
 
             return interpolate(outsidePlanetaryBoundariesArcFun(d), [
-                [parseInt(coordinates[1]) -400 + margin.left, parseInt(coordinates[2]) - 400 + height - margin.bottom],
+                [parseInt(coordinates[1]) -400, parseInt(coordinates[2]) - 400 + height - margin.bottom],
                 [parseInt(nextCoordinates[1]) -400 + margin.left, parseInt(nextCoordinates[2]) - 400 + height - margin.bottom]]
                 );
         }).end()
@@ -357,6 +356,7 @@ const transitionFromDoughnut = async () => {
         .duration(300)
         .delay(1000)
         .style('opacity', 1).end()
+    planetaryThresholdCircle.transition().delay(2000).duration(200).style('opacity', 0);
 
     animationPromises.push(
         planetaryArcsAnimation, planetaryOvershootArcsAnimation, xAxisAnimation
@@ -422,7 +422,6 @@ const transitionFromDoughnut = async () => {
     )
 
     const circleGroup = svg.append('g')
-        .attr('transform', `translate(${margin.left},0)`)
         .attr('class', 'circles-group')
     circles = circleGroup.selectAll('circle')
         .data(countryData)
@@ -433,6 +432,19 @@ const transitionFromDoughnut = async () => {
         .attr('r', d => z(d.population))
         .attr('cx', d => x(d.biophysicalTransgressed))
         .attr('cy', d => y(d.socialAchieved));
+    flagsGroup = svg.append('g')
+    flagsGroup.selectAll('circle').data(stylizedCircles)
+        .join('circle')
+            .style('opacity', 0)
+            .attr('cx', (d) => x(d.biophysicalTransgressed))
+            .attr('cy', d => y(d.socialAchieved))
+            .attr('r', 45)
+            .attr('class', (d) => d.name)
+            .attr('fill', d => `url(#${d.name})`)
+            .transition()
+            .delay(2000)
+            .duration(300)
+            .style('opacity', 1);
     animationPromises.push(
         circles.transition().delay((d, i) => 1700 + 10 * i).duration(200).style('opacity', 1).end()
     );
@@ -471,6 +483,22 @@ const transitionFromDoughnut = async () => {
     transitionedFromDoughnut = true;
     return Promise.all(animationPromises);
 };
+const curbe =d3.line().curve(d3.curveCardinal)
+function translateAlong(path, coord?) {
+  var l = path.getTotalLength();
+  return function(d, i) {
+    return function(t) {
+      var p = path.getPointAtLength(t * l);
+      if (coord === 'x') {
+          return p.x;
+      }
+      if (coord === 'y') {
+          return p.y;
+      }
+      return "translate(" + p.x + "," + p.y + ")";
+    };
+  };
+}
 
 const transitionFromChartToQuadrants = async () => {
     let transition = new Promise((resolve) => {
@@ -497,14 +525,16 @@ const transitionFromChartToQuadrants = async () => {
         .attr("text-anchor", "middle")
             .append("text")
                 .attr("font-weight", "bold")
+                .attr('font-family', "Helvetica Neue")
                 .attr('x', (d, i) => {
                     return (i % 2 ? viewportWidth / 2 : 0) + viewportWidth / 4
                 })
-                .attr('y', (d, i) => (i > 1 ? viewportHeight / 2 : 0) + viewportHeight / 4)
+                .attr('y', (d, i) => (i > 1 ? (viewportHeight / 2 + 21) : 21) + viewportHeight / 4)
                 .attr('fill', 'white')
                 .call(text => {
                     text.append('tspan')
                     .style("text-anchor","middle")
+                    .attr('x', (d, i) => `${50 + (i % 2 ? 25 : -25)}%`)
                     .text((d: Quadrant, i) => d.impact)
                     text.append('tspan')
                     .text((d: Quadrant, i) => d.dev)
@@ -516,36 +546,130 @@ const transitionFromChartToQuadrants = async () => {
     quadrantGroup.selectAll('g').transition()
         .delay((d, i) => 200 * i).duration(300)
         .style('opacity', 1)
-    const flagsGroup = svg.append('g').attr('transform', `translate(${margin.left,0})`);
-    flagsGroup.selectAll('circle').data(stylizedCircles)
-        .join('circle')
-            .style('opacity', 0)
-            .attr('cx', (d) => x(d.biophysicalTransgressed))
-            .attr('cy', d => y(d.socialAchieved))
-            .attr('r', 45)
-            .attr('class', (d) => d.name)
-            .attr('fill', d => `url(#${d.name})`)
-            .transition()
-            .delay(2000)
-            .duration(300)
-            .style('opacity', 1);
 
+
+    const animationPath = flagsGroup.selectAll('circle')
+                .each((d: StylizedCircle, i) => {
+                    console.log(d);
+                    const data: [number, number][] = [
+                            [x(d.biophysicalTransgressed), y(d.socialAchieved)],
+                            [
+                                d.name !== 'nmac' ?
+                                x(d.biophysicalTransgressed - 2) :
+                                x(d.biophysicalTransgressed + 0.4),
+                                d.name !== 'nmac' ? y(d.socialAchieved + 0.5) :
+                                y(d.socialAchieved + 2.4)
+                             ],
+                            [
+                                d.name !== 'nmac' ?
+                                x(d.biophysicalTransgressed - 3) :
+                                x(d.biophysicalTransgressed + 1),
+                                d.name !== 'nmac' ? y(d.socialAchieved + 1) :
+                                y(d.socialAchieved + 5)
+                             ]
+                        ];
+                    flagsGroup.append('path')
+                        .attr('class', `path-${d.name}`)
+                        .attr('d', (d) => curbe(data))
+                        .attr('fill', 'none')
+                        .attr('stroke', 'none')
+                });
     const firstTransition = flagsGroup.selectAll('circle')
         .transition()
-            .attr('cx', (d: StylizedCircle) => (
-                d.name !== 'nmac' ? x(d.biophysicalTransgressed - 3) :
-                x(d.biophysicalTransgressed + 1))
-            )
-            .attr('cy', (d) => (
-                d.name !== 'nmac' ? y(d.socialAchieved + 1) :
-                y(d.socialAchieved + 5))
-            )
-            .duration(500)
+        // .attrTween('transform', (d, i) =>
+        //     translateAlong(flagsGroup.select(`path.path-${d.name}`).node())(d, i)
+        // )
+            .attrTween('cx', (d: StylizedCircle, i) => (
+                translateAlong(flagsGroup.select(`path.path-${d.name}`).node(), 'x')(d, i)
+            ))
+            .attrTween('cy', (d: StylizedCircle, i) => (
+                translateAlong(flagsGroup.select(`path.path-${d.name}`).node(), 'y')(d, i)
+            //     d.name !== 'nmac' ? y(d.socialAchieved + 1) :
+            //     y(d.socialAchieved + 5))
+            ))
+            .duration(800)
             .ease(d3.easeExpIn)
-            .delay(3200).end();
+            .delay(2200).end()
+            transitionedFromChart = true;
+            return firstTransition;
+    };
+    const transitionFromQuadrantsToStylisedCircles = async () => {
+        let promise = new Promise((resolve) => {
+            resolve(1);
+        })
+        if (!transitionedFromChart) {
+            promise = transitionFromChartToQuadrants()
+        }
+        await promise;
+        const blackRect = svg.append('rect')
+            .attr('x', 0)
+            .attr('width', width)
+            .attr('y', 0)
+            .attr('height', height)
+            .style('opacity', 0)
+            .attr('fill', 'black');
+
+            const fadeToBlack= blackRect.transition()
+                .duration(400)
+                .ease(d3.easeCubicInOut)
+                .style('opacity', 1).on('end', () => {
+            flagsGroup.selectAll('circle')
+                .attr('cx', (d) => x(d.biophysicalTransgressed))
+                .attr('cy', d => y(d.socialAchieved))
+                }).end();
+            await fadeToBlack;
+            const fadeOut = blackRect.transition()
+                .delay(1200)
+                .duration(400)
+                .ease(d3.easeCubicInOut)
+                .style('opacity', 0).end();
+
+        await fadeOut
+    const animationPath = flagsGroup.selectAll('circle')
+                .each((d: StylizedCircle, i) => {
+                    console.log(d);
+                    const data: [number, number][] = [
+                            [x(d.biophysicalTransgressed), y(d.socialAchieved)],
+                            [
+                                d.name !== 'nmac' ?
+                                x(d.biophysicalTransgressed - 2) :
+                                x(d.biophysicalTransgressed - 1.6),
+                                d.name !== 'nmac' ? y(d.socialAchieved + 0.5) :
+                                y(d.socialAchieved + 2.4)
+                             ],
+                            [
+                                d.name !== 'nmac' ?
+                                x(d.biophysicalTransgressed - 3) :
+                                x(d.biophysicalTransgressed - 3.2),
+                                d.name !== 'nmac' ? y(d.socialAchieved + 1) :
+                                y(d.socialAchieved + 5)
+                             ]
+                        ];
+                    flagsGroup.append('path')
+                        .attr('class', `spath-${d.name}`)
+                        .attr('d', (d) => curbe(data))
+                        .attr('fill', 'none')
+                        .attr('stroke', 'none')
+                });
+    const secondTransition = flagsGroup.selectAll('circle')
+        .transition()
+        // .attrTween('transform', (d, i) =>
+        //     translateAlong(flagsGroup.select(`path.path-${d.name}`).node())(d, i)
+        // )
+            .attrTween('cx', (d: StylizedCircle, i) => (
+                translateAlong(flagsGroup.select(`path.spath-${d.name}`).node(), 'x')(d, i)
+            ))
+            .attrTween('cy', (d: StylizedCircle, i) => (
+                translateAlong(flagsGroup.select(`path.spath-${d.name}`).node(), 'y')(d, i)
+            //     d.name !== 'nmac' ? y(d.socialAchieved + 1) :
+            //     y(d.socialAchieved + 5))
+            ))
+            .duration(800)
+            .ease(d3.easeExpIn)
+            .delay(1200).end();
+
 
     };
-
     document.getElementById('transition-from-doughnut').addEventListener('click', transitionFromDoughnut)
     document.getElementById('transition-from-chart').addEventListener('click', transitionFromChartToQuadrants)
-    // document.getElementById('transition-to-stylised-circles').addEventListener('click', transitionFromQuadrantsToStylisedCircles);
+    document.getElementById('transition-to-stylised-circles').addEventListener('click', transitionFromQuadrantsToStylisedCircles);
